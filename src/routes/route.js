@@ -7,5 +7,9 @@ router.get("/",adminctrl.homePage);
 router.get("/s",adminctrl.simple)
 router.post("/register",adminctrl.registerpage);
 router.post("/login",adminctrl.loginpage);
+router.post("/addcourse",adminctrl.addCourse);
+router.post("/addexam",adminctrl.addexam);
+router.post("/addschedule",adminctrl.createschedule);
+
 
 module.exports=router;
