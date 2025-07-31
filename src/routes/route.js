@@ -13,3 +13,9 @@ router.post("/addschedule",adminctrl.createschedule);
 
 
 module.exports=router;
+
+/*
+
+-------------------
+------------------
+*/
