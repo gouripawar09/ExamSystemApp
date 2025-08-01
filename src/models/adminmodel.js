@@ -89,7 +89,8 @@ exports.addcoursedetails=(course_name)=>{
 
 exports.addexamdetails=(title ,total_marks,duration ,userid,course_id  )=>{
      return new Promise((resolve,reject)=>{
-        db.query("insert into exam(title ,total_marks,duration ,userid,course_id,created_at) values(?,?,?,?,?)",[title ,total_marks,duration ,userid,course_id,created_at],(err,results)=>{
+        const created_at= new Date();
+        db.query("insert into exam(title ,total_marks,duration ,userid,course_id,created_at) values(?,?,?,?,?,?)",[title ,total_marks,duration ,userid,course_id,created_at],(err,results)=>{
             if(err){
                 console.log("exam not added");
                  return reject(err);
@@ -102,6 +103,74 @@ exports.addexamdetails=(title ,total_marks,duration ,userid,course_id  )=>{
     })
 }
 
+exports.getSchedule=()=>{
+    return new Promise((resolve,reject)=>{
+        db.query("select * from schedule",(err,results)=>{
+            if(err){
+                console.log(err);
+                return reject(err);
+            }
+            else{
+                resolve(results);
+            }
+        })
+    })
+}
+
+exports.deleteSchedule=(schedule_id)=>{
+    return new Promise((resolve,reject)=>{
+        db.query("delete from schedule where schedule_id=? ",[schedule_id],(err,result)=>{
+            if(err){
+                console.log(err);
+                return reject(err);
+            }
+            else{
+                resolve("schedule deleted");
+            }
+        })
+    })
+}
+         
+exports.fetchScheduleById=(schedule_id)=>{
+    return new Promise((resolve,reject)=>{
+        db.query("Select * from schedule where schedule_id=?",[schedule_id],(err,result)=>{
+            if(err)
+            {
+                reject(err);
+            }
+            else{
+                resolve(result);
+            }
+        })
+    });
+
+}
+
+exports.upschedulDeta=(schedule_id,exam_id,start_time ,end_time)=>{
+    return new Promise((resolve,reject)=>{
+        db.query("update schedule set exam_id=?,start_time=?,end_time=? where schedule_id=?",[exam_id,start_time ,end_time,schedule_id],(err,result)=>{
+            if(err){
+                console.log(err);
+               return  reject(err);
+            }else
+            {
+                console.log(result);
+                resolve("updated successfully");
+            }
+        });
+    });
+}
 
 
-        
+
+exports.searchScheduleByDate = (created_at) => {
+    return new Promise((resolve, reject) => {
+        db.query("SELECT * FROM schedule WHERE DATE(created_at) = ?", [created_at], (err, results) => {
+            if (err) {
+                console.log("DB Error:", err);
+                return reject(err);
+            }
+            resolve(results);
+        });
+    });
+};
