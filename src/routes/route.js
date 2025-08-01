@@ -32,6 +32,6 @@ router.delete("/api/delete/exam/:exam_id",verifytoken,isAdmin,examctrl.deleteexa
 router.get('/api/exam/search/:created_at', examctrl.searchByDate);
 router.post('/api/exam/:exam_id/schedule', examctrl.assignSchedule);
 
-//i am piusha
+
 
 module.exports=router;
