@@ -1,0 +1,22 @@
+# Node modules and environment
+node_modules/
+.env
+
+# Editor settings
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Build and temp (if any)
+dist/
+build/
+tmp/
+
+# Optional database file
+database.sql
